@@ -1,12 +1,12 @@
 package javaQnA;
 
 public class RotationFactor {
-	private static final String ZERO = "0";
-	private static final String NINE = "9";
-	private static final String UPPER_CASE_A = "A";
-	private static final String UPPER_CASE_Z = "Z";
-	private static final String LOWER_CASE_Z = "z";
-	private static final String LOWER_CASE_A = "a";
+	private static final int ZERO_CODEPOINT = "0".codePointAt(0);
+	private static final int NINE_CODEPOINT = "9".codePointAt(0);
+	private static final int UPPER_CASE_A_CODEPOINT = "A".codePointAt(0);
+	private static final int UPPER_CASE_Z_CODEPOINT = "Z".codePointAt(0);
+	private static final int LOWER_CASE_Z_CODEPOINT = "z".codePointAt(0);
+	private static final int LOWER_CASE_A_CODEPOINT = "a".codePointAt(0);
 
 	// Add any helper functions you may need here
 
@@ -23,22 +23,21 @@ public class RotationFactor {
 		StringBuilder sb = new StringBuilder();
 		for (int s : input.codePoints().toArray()) {
 			if (Character.isAlphabetic(s)) {
-				boolean lowerCase = s >= LOWER_CASE_A.codePointAt(0) && s <= LOWER_CASE_Z.codePointAt(0);
-				int alphaCodePoint = s == LOWER_CASE_Z.codePointAt(0)
-						? LOWER_CASE_A.codePointAt(0) + rotationFactorAlpha - 1
-						: s == UPPER_CASE_Z.codePointAt(0) ? UPPER_CASE_A.codePointAt(0) + rotationFactorAlpha - 1
+				boolean lowerCase = s >= LOWER_CASE_A_CODEPOINT && s <= LOWER_CASE_Z_CODEPOINT;
+				int alphaCodePoint = s == LOWER_CASE_Z_CODEPOINT ? LOWER_CASE_A_CODEPOINT + rotationFactorAlpha - 1
+						: s == UPPER_CASE_Z_CODEPOINT ? UPPER_CASE_A_CODEPOINT + rotationFactorAlpha - 1
 								: s + rotationFactorAlpha;
-				if (lowerCase && alphaCodePoint > LOWER_CASE_Z.codePointAt(0)) {
-					alphaCodePoint = LOWER_CASE_A.codePointAt(0) + alphaCodePoint - LOWER_CASE_Z.codePointAt(0) - 1;
-				} else if (!lowerCase && alphaCodePoint > UPPER_CASE_Z.codePointAt(0)) {
-					alphaCodePoint = UPPER_CASE_A.codePointAt(0) + alphaCodePoint - UPPER_CASE_Z.codePointAt(0) - 1;
+				if (lowerCase && alphaCodePoint > LOWER_CASE_Z_CODEPOINT) {
+					alphaCodePoint = LOWER_CASE_A_CODEPOINT + alphaCodePoint - LOWER_CASE_Z_CODEPOINT - 1;
+				} else if (!lowerCase && alphaCodePoint > UPPER_CASE_Z_CODEPOINT) {
+					alphaCodePoint = UPPER_CASE_A_CODEPOINT + alphaCodePoint - UPPER_CASE_Z_CODEPOINT - 1;
 				}
 				sb.append(Character.toChars(alphaCodePoint));
 			} else if (Character.isDigit(s)) {
-				int numericCodePoint = s == NINE.codePointAt(0) ? ZERO.codePointAt(0) + rotationFactorNumbers - 1
+				int numericCodePoint = s == NINE_CODEPOINT ? ZERO_CODEPOINT + rotationFactorNumbers - 1
 						: s + rotationFactorNumbers;
-				if (numericCodePoint > NINE.codePointAt(0)) {
-					numericCodePoint = ZERO.codePointAt(0) + numericCodePoint - NINE.codePointAt(0) - 1;
+				if (numericCodePoint > NINE_CODEPOINT) {
+					numericCodePoint = ZERO_CODEPOINT + numericCodePoint - NINE_CODEPOINT - 1;
 				}
 				sb.append(Character.toChars(numericCodePoint));
 			} else {
