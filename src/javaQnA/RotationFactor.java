@@ -1,5 +1,6 @@
 package javaQnA;
 
+// Rotation cipher typical problem where strings are shifted by a certain value provided as input
 public class RotationFactor {
 	private static final int ZERO_CODEPOINT = "0".codePointAt(0);
 	private static final int NINE_CODEPOINT = "9".codePointAt(0);

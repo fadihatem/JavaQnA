@@ -3,6 +3,7 @@ package javaQnA;
 import java.util.ArrayList;
 import java.util.Stack;
 
+// Typical basic calculator problem
 public class Calculate {
 	public int calculate(String s) {
 		// delete white spaces

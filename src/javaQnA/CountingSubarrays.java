@@ -2,9 +2,9 @@ package javaQnA;
 
 import java.util.Arrays;
 
+// Typical counting subarrays problem
 public class CountingSubarrays {
 	int[] countSubarrays(int[] arr) {
-		// Write your code here
 		int len = arr.length;
 		int[] countSubarrays = new int[len];
 		for (int i = 0; i < arr.length; i++) {

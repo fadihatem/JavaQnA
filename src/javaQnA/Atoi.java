@@ -2,6 +2,7 @@ package javaQnA;
 
 import java.util.List;
 
+// Typical atoi implementation problem
 public class Atoi {
 	public int atoi(String str) {
 		if (str == null || str.length() < 1)
