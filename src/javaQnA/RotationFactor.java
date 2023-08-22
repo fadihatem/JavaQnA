@@ -22,9 +22,6 @@ public class RotationFactor {
 		}
 		StringBuilder sb = new StringBuilder();
 		for (int s : input.codePoints().toArray()) {
-			if (s == "N".codePointAt(0)) {
-				System.out.println("hello");
-			}
 			if (Character.isAlphabetic(s)) {
 				boolean lowerCase = s >= LOWER_CASE_A.codePointAt(0) && s <= LOWER_CASE_Z.codePointAt(0);
 				int alphaCodePoint = s == LOWER_CASE_Z.codePointAt(0)
