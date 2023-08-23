@@ -9,8 +9,6 @@ public class RotationFactor {
 	private static final int LOWER_CASE_Z_CODEPOINT = "z".codePointAt(0);
 	private static final int LOWER_CASE_A_CODEPOINT = "a".codePointAt(0);
 
-	// Add any helper functions you may need here
-
 	String rotationalCipher(String input, int rotationFactor) {
 		int alphaLimit = 26;
 		int numbersLimit = 10;
