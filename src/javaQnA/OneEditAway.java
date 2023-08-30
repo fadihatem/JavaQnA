@@ -1,5 +1,7 @@
 package javaQnA;
 
+import java.util.List;
+
 public class OneEditAway {
 	boolean one_edit_apart(String s1, String s2) {
 		if (s1.length() > s2.length()) {
@@ -50,43 +52,31 @@ public class OneEditAway {
 		System.out.print("[\"" + str + "\"]");
 	}
 
+	class OneEditAwayTestCase {
+		String input_1;
+		String input_2;
+		boolean expected;
+
+		OneEditAwayTestCase(String input_1, String input_2, boolean expected) {
+			this.input_1 = input_1;
+			this.input_2 = input_2;
+			this.expected = expected;
+		}
+	}
+
 	public void run() {
-		String input_1 = "Cheud-426?";
-		String input_2 = "Cheud-726?";
-		boolean expected_1 = true;
-		boolean output_1 = one_edit_apart(input_1, input_2);
-		check(expected_1, output_1);
+		List<OneEditAwayTestCase> tests = List.of(new OneEditAwayTestCase("Cheud-426?", "Cheud-726?", true),
+				new OneEditAwayTestCase("abcdefghijklmNOPQRSTUVWXYZ012", "nopqrstuvwxyzABCDEFGHIJKLM9012345678", false),
+				new OneEditAwayTestCase("abcdefghijklmNOPQRSTUVWXYZ0123456789", "nopqrstuvwxyzABCDEFGHIJKLM90", false),
+				new OneEditAwayTestCase("abcdefghijklmNOPQRSTUVWXYZ01345678", "abcdefghijklmNOPQRSTUVWXYZ012345678",
+						true),
+				new OneEditAwayTestCase("abcdefghijklmNOPQRSTUVWXYZ012345678", "abcdefghijklmNOPQRSTUVWXYZ01345678",
+						true),
+				new OneEditAwayTestCase("abc", "abd", true));
 
-		String input_3 = "abcdefghijklmNOPQRSTUVWXYZ012";
-		String input_4 = "nopqrstuvwxyzABCDEFGHIJKLM9012345678";
-		boolean expected_2 = false;
-		boolean output_2 = one_edit_apart(input_3, input_4);
-		check(expected_2, output_2);
-
-		String input_5 = "abcdefghijklmNOPQRSTUVWXYZ0123456789";
-		String input_6 = "nopqrstuvwxyzABCDEFGHIJKLM90";
-		boolean expected_3 = false;
-		boolean output_3 = one_edit_apart(input_5, input_6);
-		check(expected_3, output_3);
-
-		String input_7 = "abcdefghijklmNOPQRSTUVWXYZ01345678";
-		String input_8 = "abcdefghijklmNOPQRSTUVWXYZ012345678";
-		boolean expected_4 = true;
-		boolean output_4 = one_edit_apart(input_7, input_8);
-		check(expected_4, output_4);
-
-		String input__9 = "abcdefghijklmNOPQRSTUVWXYZ012345678";
-		String input_10 = "abcdefghijklmNOPQRSTUVWXYZ01345678";
-		boolean expected_5 = true;
-		boolean output_5 = one_edit_apart(input__9, input_10);
-		check(expected_5, output_5);
-
-		String input_11 = "abc";
-		String input_12 = "abd";
-		boolean expected_6 = true;
-		boolean output_6 = one_edit_apart(input_11, input_12);
-		check(expected_6, output_6);
-
+		for (OneEditAwayTestCase test : tests) {
+			check(test.expected, one_edit_apart(test.input_1, test.input_2));
+		}
 		// Add your own test cases here
 
 	}
