@@ -7,21 +7,17 @@ public class BinarySearch {
 	Integer binarySearch(List<Integer> arr, int target) {
 		int left = 0;
 		int right = arr.size() - 1;
-
 		while (left < right) {
 			int middle = Math.floorDiv(left + right, 2);
 			int middleValue = arr.get(middle);
-
 			if (middleValue == target) {
 				return middle;
 			} else if (target < middleValue) {// search left
 				right = middle - 1;
-			} else {
+			} else {// search right
 				left = middle + 1;
 			}
-
 		}
-
 		return -1;
 	}
 
