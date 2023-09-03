@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -57,29 +56,33 @@ public class ArtisticPhotographCount {
 		}
 
 		boolean isArtistic() {
-			boolean isArtistic = false;
-			Optional<PhotographElementAndPosition> photographerFound = Arrays.asList(photographElementAndPosition)
-					.stream().filter(a -> a.photographElement.equals(PhotographElement.PHOTOGRAPHER)).findFirst();
-			Optional<PhotographElementAndPosition> actorFound = Arrays.asList(photographElementAndPosition).stream()
-					.filter(a -> a.photographElement.equals(PhotographElement.ACTOR)).findFirst();
-			Optional<PhotographElementAndPosition> backdropFound = Arrays.asList(photographElementAndPosition).stream()
-					.filter(a -> a.photographElement.equals(PhotographElement.BACKDROP)).findFirst();
-			if (photographerFound.isPresent() && actorFound.isPresent() && backdropFound.isPresent()) {
-				int pPos = photographerFound.get().position;
-				int aPos = actorFound.get().position;
-				int bPos = backdropFound.get().position;
-				// first check actor is between photographer and backdrop
-				boolean actorBetweenPhotographerAndBackdrop = ((aPos > pPos && aPos < bPos)
-						|| (aPos > bPos && aPos < pPos));
-				// Second check if absolute distance is between X and Y
-				int distActorPhotographer = Math.abs(aPos - pPos);
-				int distActorBackdrop = Math.abs(aPos - bPos);
-				boolean absoluteDistanceWithinRange = (distActorPhotographer >= X && distActorPhotographer <= Y
-						&& distActorBackdrop >= X && distActorBackdrop <= Y);
-				isArtistic = actorBetweenPhotographerAndBackdrop && absoluteDistanceWithinRange;
-			}
-			return isArtistic;
+			int pPos = photographElementAndPosition[0].position;
+			int aPos = photographElementAndPosition[1].position;
+			int bPos = photographElementAndPosition[2].position;
+			// first check actor is between photographer and backdrop
+			boolean actorBetweenPhotographerAndBackdrop = ((aPos > pPos && aPos < bPos)
+					|| (aPos > bPos && aPos < pPos));
+			// Second check if absolute distance is between X and Y
+			int distActorPhotographer = Math.abs(aPos - pPos);
+			int distActorBackdrop = Math.abs(aPos - bPos);
+			boolean absoluteDistanceWithinRange = (distActorPhotographer >= X && distActorPhotographer <= Y
+					&& distActorBackdrop >= X && distActorBackdrop <= Y);
+			return actorBetweenPhotographerAndBackdrop && absoluteDistanceWithinRange;
 		}
+	}
+
+	private Map<PhotographElement, List<PhotographElementAndPosition>> getPhotographElements(int N, String C) {
+		Map<PhotographElement, List<PhotographElementAndPosition>> photoMap = new HashMap<>();
+		for (int i = 0; i < N; i++) {
+			PhotographElement byChar = PhotographElement.getByChar(String.valueOf(C.charAt(i)));
+			if (byChar != null && !byChar.equals(PhotographElement.EMPTY)) {
+				if (photoMap.get(byChar) == null) {
+					photoMap.put(byChar, new ArrayList<>());
+				}
+				photoMap.get(byChar).add(new PhotographElementAndPosition(byChar, i));
+			}
+		}
+		return photoMap;
 	}
 
 	public int getArtisticPhotographCount(int N, String C, int X, int Y) {
@@ -88,7 +91,7 @@ public class ArtisticPhotographCount {
 		}
 		int artisticPhotos = 0;
 		// First create a purged list of photograph elements that are not null or empty
-		Map<PhotographElement, List<PhotographElementAndPosition>> photosMap = getPhotographElements(C);
+		Map<PhotographElement, List<PhotographElementAndPosition>> photosMap = getPhotographElements(N, C);
 		// Now loop on the list to create potential artistic photos
 		for (PhotographElementAndPosition photographer : photosMap.get(PhotographElement.PHOTOGRAPHER)) {
 			for (PhotographElementAndPosition actor : photosMap.get(PhotographElement.ACTOR)) {
@@ -105,20 +108,6 @@ public class ArtisticPhotographCount {
 			}
 		}
 		return artisticPhotos;
-	}
-
-	private Map<PhotographElement, List<PhotographElementAndPosition>> getPhotographElements(String C) {
-		Map<PhotographElement, List<PhotographElementAndPosition>> photoMap = new HashMap<>();
-		for (int i = 0; i < C.length(); i++) {
-			PhotographElement byChar = PhotographElement.getByChar(String.valueOf(C.charAt(i)));
-			if (byChar != null && !byChar.equals(PhotographElement.EMPTY)) {
-				if (photoMap.get(byChar) == null) {
-					photoMap.put(byChar, new ArrayList<>());
-				}
-				photoMap.get(byChar).add(new PhotographElementAndPosition(byChar, i));
-			}
-		}
-		return photoMap;
 	}
 
 	// These are the tests we use to determine if the solution is correct.

@@ -12,11 +12,9 @@ public class Cafeteria {
 				|| maxValue > N)
 			return 0L;
 		boolean[] seatsTaken = new boolean[(int) N];
-		for (int i = 0; i < S.length; i++) {
-			int start = 0;
-			int end = 0;
-			start = findStart(K, S[i]);
-			end = findEnd(N, K, S[i]);
+		for (int i = 0; i < M; i++) {
+			int start = findStart(K, S[i]);
+			int end = findEnd(N, K, S[i]);
 			for (int j = start; j < end; j++) {
 				seatsTaken[j] = true;
 			}
@@ -24,7 +22,7 @@ public class Cafeteria {
 		long count = 0L;
 		for (int i = 0; i < N; i++) {
 			if (!seatsTaken[i]) {
-				int end = (int) (i + K + 1 <= N ? i + K + 1 : N);
+				int end = (int) (i + K + 1 < N ? i + K + 1 : N);
 				boolean seatRightAvailable = end < N ? true : false;
 				// right end check
 				for (int j = i + 1; j < end; j++) {
@@ -37,7 +35,7 @@ public class Cafeteria {
 					++count;
 				}
 				// left end check
-				int start = (int) (i - K >= 0 ? i - K : 0);
+				int start = (int) (i - K > 0 ? i - K : 0);
 				boolean seatLeftAvailable = start > 0 ? true : false;
 				for (int j = start; j < i; j++) {
 					if (seatsTaken[j]) {
