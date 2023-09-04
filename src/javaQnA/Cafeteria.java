@@ -54,7 +54,7 @@ public class Cafeteria {
 	private static int findEnd(long N, long K, long value) {
 		int end;
 		if (value + K >= N) {
-			end = (int) (N);
+			end = (int) N;
 		} else {
 			end = (int) (value + K);
 		}
