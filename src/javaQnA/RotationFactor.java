@@ -10,8 +10,8 @@ public class RotationFactor {
 	private static final int LOWER_CASE_A_CODEPOINT = "a".codePointAt(0);
 
 	String rotationalCipher(String input, int rotationFactor) {
-		int alphaLimit = 26;
-		int numbersLimit = 10;
+		int alphaLimit = 26;// 26 letters
+		int numbersLimit = 10;// 10 digits
 		int rotationFactorAlpha = rotationFactor % alphaLimit;
 		int rotationFactorNumbers = rotationFactor % numbersLimit;
 		int size = input.length();
@@ -33,8 +33,7 @@ public class RotationFactor {
 				}
 				sb.append(Character.toChars(alphaCodePoint));
 			} else if (Character.isDigit(s)) {
-				int numericCodePoint = s == NINE_CODEPOINT ? ZERO_CODEPOINT + rotationFactorNumbers - 1
-						: s + rotationFactorNumbers;
+				int numericCodePoint = s + rotationFactorNumbers;
 				if (numericCodePoint > NINE_CODEPOINT) {
 					numericCodePoint = ZERO_CODEPOINT + numericCodePoint - NINE_CODEPOINT - 1;
 				}
@@ -84,7 +83,11 @@ public class RotationFactor {
 		check(expected_2, output_2);
 
 		// Add your own test cases here
-
+		String input_3 = "abcdZXYzxy-999.@";
+		int rotationFactor_3 = 200;
+		String expected_3 = "stuvRPQrpq-999.@";
+		String output_3 = rotationalCipher(input_3, rotationFactor_3);
+		check(expected_3, output_3);
 	}
 
 	public static void main(String[] args) {
