@@ -22,16 +22,14 @@ public class UniqueIntegers {
 	private long extractUniqueNumber(String b) {
 		long firstDigit = Long.parseLong(String.valueOf(b.charAt(0)));
 		int startLength = b.length();
-		long uniqueNumber = Long
-				.parseLong(String.format("%0" + startLength + "d", 0).replaceAll("0", String.valueOf(firstDigit)));
+		long uniqueNumber = Long.parseLong(String.valueOf(firstDigit).repeat(startLength));
 		while (uniqueNumber > Long.parseLong(b)) {
 			startLength = firstDigit == 1 ? startLength - 1 : startLength;
 			firstDigit = firstDigit == 1 ? 9 : firstDigit - 1;
 			if (startLength == 0) {
 				break;
 			}
-			uniqueNumber = Long
-					.parseLong(String.format("%0" + startLength + "d", 0).replaceAll("0", String.valueOf(firstDigit)));
+			uniqueNumber = Long.parseLong(String.valueOf(firstDigit).repeat(startLength));
 		}
 		return uniqueNumber;
 	}
