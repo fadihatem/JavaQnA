@@ -10,16 +10,17 @@ public class MinProblemCount {
 	public int getMinProblemCount(int N, int[] S) {
 		int minValue = Arrays.stream(S).min().getAsInt();
 		int maxValue = Arrays.stream(S).max().getAsInt();
-		if (N < 1 || N > 500000 || minValue < 1 || maxValue > 1000000) {
+		if (N < 1 || N > 500000 || minValue < 1 || maxValue > 1000000 || maxValue < 1 || S.length != N) {
 			return 0;
 		}
 		Map<Boolean, List<Integer>> partitions = Arrays.stream(S).boxed()
 				.collect(Collectors.partitioningBy(x -> x % 2 == 0));
+
 		int maxEven = partitions.get(true).size() > 0 ? partitions.get(true).stream().mapToInt(v -> v).max().getAsInt()
 				: 0;
 		int maxOdd = partitions.get(false).size() > 0 ? partitions.get(false).stream().mapToInt(v -> v).max().getAsInt()
 				: 0;
-		return maxValue == maxEven ? maxEven / 2 + (maxOdd > 0 ? 1 : 0) : maxOdd / 2 + maxOdd % 2;
+		return maxValue == maxEven ? maxEven / 2 + (maxOdd > 0 ? 1 : 0) : maxOdd / 2 + 1;
 	}
 
 	// These are the tests we use to determine if the solution is correct.
