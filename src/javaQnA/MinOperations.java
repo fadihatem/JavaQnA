@@ -12,7 +12,22 @@ public class MinOperations {
 		int[] newPermutationArray = arr.clone();
 		do {
 			for (int i = 0; i + 1 < newPermutationArray.length; i++) {
-				if (newPermutationArray[i + 1] < newPermutationArray[i]) {
+				int diff = newPermutationArray[i + 1] - newPermutationArray[i];
+				int startIndex = i + 1;
+				if (diff > 1) {
+					int loopStartIndex = startIndex + 1;
+					while (loopStartIndex < newPermutationArray.length && newPermutationArray[startIndex]
+							- newPermutationArray[loopStartIndex] == loopStartIndex - startIndex) {
+						++loopStartIndex;
+					}
+					--loopStartIndex;
+					if (newPermutationArray[startIndex] - newPermutationArray[loopStartIndex] == loopStartIndex
+							- startIndex) {
+						swap(newPermutationArray, loopStartIndex, startIndex);
+						++minOperations;
+					}
+
+				} else if (diff < 1) {
 					swap(newPermutationArray, i + 1, i);
 					++minOperations;
 				}
@@ -54,7 +69,7 @@ public class MinOperations {
 	public void run() {
 
 		int[] arr_1 = { 1, 2, 5, 4, 3 };
-		int expected_1 = 3;
+		int expected_1 = 1;
 		int output_1 = minOperations(arr_1);
 		check(expected_1, output_1);
 
