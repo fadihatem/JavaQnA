@@ -38,7 +38,7 @@ public class Atoi {
 	public void run() {
 		var stringList = List.of("-9823", "+2783652", "122", "012");
 		for (String s : stringList)
-			System.out.println(s);
+			System.out.println(s + " atoi=" + atoi(s));
 
 	}
 
