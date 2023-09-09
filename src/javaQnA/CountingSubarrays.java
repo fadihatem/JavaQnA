@@ -10,7 +10,7 @@ public class CountingSubarrays {
 		for (int i = 0; i < arr.length; i++) {
 			int j = 0;
 			while (j <= i) {
-				int[] leftArray = Arrays.copyOfRange(arr, j, i + 1);
+				int[] leftArray = Arrays.copyOfRange(arr, j, i + 1 < arr.length ? i + 1 : arr.length - 1);
 				if (Arrays.stream(leftArray).max().getAsInt() == arr[i]) {
 					countSubarrays[i] += 1;
 				}
@@ -18,7 +18,7 @@ public class CountingSubarrays {
 			}
 			j = i + 1;
 			while (j < arr.length) {
-				int[] rightArray = Arrays.copyOfRange(arr, i, j + 1);
+				int[] rightArray = Arrays.copyOfRange(arr, i, j + 1 < arr.length ? j + 1 : arr.length - 1);
 				if (Arrays.stream(rightArray).max().getAsInt() == arr[i]) {
 					countSubarrays[i] += 1;
 				}
