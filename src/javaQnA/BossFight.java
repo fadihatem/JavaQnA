@@ -40,6 +40,14 @@ public class BossFight {
 		});
 		double maxScenario1 = Math.max(calculateDamage(B, warriors.get(0), warriors.get(1)),
 				calculateDamage(B, warriors.get(1), warriors.get(0)));
+		if (warriors.size() > 2) {
+			maxScenario1 = Math.max(maxScenario1, Math.max(calculateDamage(B, warriors.get(0), warriors.get(2)),
+					calculateDamage(B, warriors.get(2), warriors.get(0))));
+		}
+		if (warriors.size() > 3) {
+			maxScenario1 = Math.max(maxScenario1, Math.max(calculateDamage(B, warriors.get(0), warriors.get(3)),
+					calculateDamage(B, warriors.get(3), warriors.get(0))));
+		}
 		warriors.sort(new Comparator<Warrior>() {
 
 			@Override
@@ -50,6 +58,14 @@ public class BossFight {
 		});
 		double maxScenario2 = Math.max(calculateDamage(B, warriors.get(0), warriors.get(1)),
 				calculateDamage(B, warriors.get(1), warriors.get(0)));
+		if (warriors.size() > 2) {
+			maxScenario2 = Math.max(maxScenario2, Math.max(calculateDamage(B, warriors.get(0), warriors.get(2)),
+					calculateDamage(B, warriors.get(2), warriors.get(0))));
+		}
+		if (warriors.size() > 3) {
+			maxScenario2 = Math.max(maxScenario2, Math.max(calculateDamage(B, warriors.get(0), warriors.get(3)),
+					calculateDamage(B, warriors.get(3), warriors.get(0))));
+		}
 		return Double.parseDouble(String.format("%.6f", Math.max(maxScenario1, maxScenario2)));
 	}
 
