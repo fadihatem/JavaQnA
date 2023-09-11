@@ -46,6 +46,8 @@ public class MinProblemCount {
 		check(3, getMinProblemCount(4, new int[] { 4, 3, 3, 4 }));
 		check(4, getMinProblemCount(4, new int[] { 2, 4, 6, 8 }));
 		check(3, getMinProblemCount(3, new int[] { 3, 1, 4 }));
+		check(2, getMinProblemCount(2, new int[] { 3, 2 }));
+		check(2, getMinProblemCount(2, new int[] { 2, 1 }));
 	}
 
 	public static void main(String[] args) throws IOException {
