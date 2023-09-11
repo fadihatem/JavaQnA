@@ -20,7 +20,7 @@ public class MinProblemCount {
 				: 0;
 		int maxOdd = partitions.get(false).size() > 0 ? partitions.get(false).stream().mapToInt(v -> v).max().getAsInt()
 				: 0;
-		return maxValue == maxEven ? maxEven / 2 + (maxOdd > 0 ? maxOdd % 2 : 0) : maxOdd / 2 + maxOdd % 2;
+		return maxValue == maxEven ? maxEven / 2 + (maxOdd > 0 ? 1 : 0) : maxOdd / 2 + maxOdd % 2;
 	}
 
 	// These are the tests we use to determine if the solution is correct.
@@ -45,6 +45,7 @@ public class MinProblemCount {
 		check(4, getMinProblemCount(6, new int[] { 1, 2, 3, 4, 5, 6 }));
 		check(3, getMinProblemCount(4, new int[] { 4, 3, 3, 4 }));
 		check(4, getMinProblemCount(4, new int[] { 2, 4, 6, 8 }));
+		check(3, getMinProblemCount(3, new int[] { 3, 1, 4 }));
 	}
 
 	public static void main(String[] args) throws IOException {

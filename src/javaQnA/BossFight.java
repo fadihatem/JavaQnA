@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
 
 public class BossFight {
 
@@ -40,13 +41,13 @@ public class BossFight {
 		});
 		double maxScenario1 = Math.max(calculateDamage(B, warriors.get(0), warriors.get(1)),
 				calculateDamage(B, warriors.get(1), warriors.get(0)));
-		if (warriors.size() > 2) {
-			maxScenario1 = Math.max(maxScenario1, Math.max(calculateDamage(B, warriors.get(0), warriors.get(2)),
-					calculateDamage(B, warriors.get(2), warriors.get(0))));
-		}
-		if (warriors.size() > 3) {
-			maxScenario1 = Math.max(maxScenario1, Math.max(calculateDamage(B, warriors.get(0), warriors.get(3)),
-					calculateDamage(B, warriors.get(3), warriors.get(0))));
+		for (int i : List.of(2, 3)) {
+			if (warriors.size() > i) {
+				maxScenario1 = Math.max(maxScenario1, Math.max(calculateDamage(B, warriors.get(0), warriors.get(i)),
+						calculateDamage(B, warriors.get(i), warriors.get(0))));
+				maxScenario1 = Math.max(maxScenario1, Math.max(calculateDamage(B, warriors.get(1), warriors.get(i)),
+						calculateDamage(B, warriors.get(i), warriors.get(1))));
+			}
 		}
 		warriors.sort(new Comparator<Warrior>() {
 
@@ -58,13 +59,13 @@ public class BossFight {
 		});
 		double maxScenario2 = Math.max(calculateDamage(B, warriors.get(0), warriors.get(1)),
 				calculateDamage(B, warriors.get(1), warriors.get(0)));
-		if (warriors.size() > 2) {
-			maxScenario2 = Math.max(maxScenario2, Math.max(calculateDamage(B, warriors.get(0), warriors.get(2)),
-					calculateDamage(B, warriors.get(2), warriors.get(0))));
-		}
-		if (warriors.size() > 3) {
-			maxScenario2 = Math.max(maxScenario2, Math.max(calculateDamage(B, warriors.get(0), warriors.get(3)),
-					calculateDamage(B, warriors.get(3), warriors.get(0))));
+		for (int i : List.of(2, 3)) {
+			if (warriors.size() > i) {
+				maxScenario2 = Math.max(maxScenario2, Math.max(calculateDamage(B, warriors.get(0), warriors.get(i)),
+						calculateDamage(B, warriors.get(i), warriors.get(0))));
+				maxScenario2 = Math.max(maxScenario2, Math.max(calculateDamage(B, warriors.get(1), warriors.get(i)),
+						calculateDamage(B, warriors.get(i), warriors.get(1))));
+			}
 		}
 		return Double.parseDouble(String.format("%.6f", Math.max(maxScenario1, maxScenario2)));
 	}
