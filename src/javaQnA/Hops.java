@@ -18,7 +18,7 @@ public class Hops {
 				int start = i;
 				int end = i + 1;
 				while (P[end] - P[start] > 1 && start <= P.length - 2) {
-					jumps += P[i + 1] - P[i];
+					jumps += P[end] - P[start];
 					start++;
 					end++;
 				}
