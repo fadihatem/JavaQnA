@@ -20,7 +20,7 @@ public class MinProblemCount {
 				: 0;
 		int maxOdd = partitions.get(false).size() > 0 ? partitions.get(false).stream().mapToInt(v -> v).max().getAsInt()
 				: 0;
-		return maxValue == maxEven ? maxEven / 2 + (maxOdd > 0 ? 1 : 0) : maxOdd / 2 + maxOdd % 2;
+		return maxValue == maxEven ? maxEven / 2 + maxOdd % 2 : maxOdd / 2 + maxOdd % 2;
 	}
 
 	// These are the tests we use to determine if the solution is correct.
